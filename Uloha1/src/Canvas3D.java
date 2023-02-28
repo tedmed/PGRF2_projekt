@@ -3,10 +3,7 @@ import raster.LineRasterizer;
 import raster.RasterBufferedImage;
 import render.WireRenderer;
 import solids.*;
-import transforms.Camera;
-import transforms.Mat4;
-import transforms.Mat4PerspRH;
-import transforms.Vec3D;
+import transforms.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +11,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Canvas3D {
     private final JFrame frame;
@@ -140,6 +139,15 @@ public class Canvas3D {
                 }
             }
         });
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                octagon.setModel(octagon.getModel().mul(new Mat4RotZ(0.005)));
+                display();
+            }
+        }, 10, 5);
     }
 
     private void display() {
