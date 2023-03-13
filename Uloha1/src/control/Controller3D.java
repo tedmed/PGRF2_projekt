@@ -1,8 +1,9 @@
 package control;
 
-import Objects.Arrow;
-import Objects.Cube;
-import Objects.Pyramid;
+import objects.Arrow;
+import objects.Cube;
+import objects.Octagon;
+import objects.Pyramid;
 import model.Solid;
 import raster.ImageBuffer;
 import raster.ZBuffer;
@@ -13,6 +14,8 @@ import transforms.*;
 import view.Panel;
 
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller3D implements Controller {
     private final Panel panel;
@@ -20,7 +23,7 @@ public class Controller3D implements Controller {
     private final TriangleRasterizer triangleRasterizer;
     private final LineRasterizer lineRasterizer;
     private Renderer renderer;
-    private Solid arrow, cube, pyramid;
+    private Solid arrow, cube, pyramid, octagon;
     private Mat4 proj;
     private Camera camera;
     private double cameraSpeed = 0.1;
@@ -42,6 +45,7 @@ public class Controller3D implements Controller {
         arrow = new Arrow();
         cube = new Cube();
         pyramid = new Pyramid();
+        octagon = new Octagon();
     }
 
     @Override
@@ -56,9 +60,9 @@ public class Controller3D implements Controller {
 
         oldAz = 15;
         oldZen = -20;
-        x = 0;
-        y = 0;
-        z = 1;
+        x = -8;
+        y = -2;
+        z = 3;
 
         panel.requestFocus();
         panel.requestFocusInWindow();
@@ -93,7 +97,7 @@ public class Controller3D implements Controller {
         });
         camera = new Camera(new Vec3D(x, y, z), Math.toRadians(oldAz), Math.toRadians(oldZen), 1, true);
 
-        proj = new Mat4PerspRH(Math.toRadians(60), (float) zBuffer.getWidth() / zBuffer.getHeight(), 0.01, 600);
+        proj = new Mat4PerspRH(Math.toRadians(60), (float) zBuffer.getWidth() / zBuffer.getHeight(), 0.1, 300);
 //        proj = new Mat4OrthoRH(5, 5, 0.01, 600);
 
         renderer = new Renderer(triangleRasterizer, lineRasterizer, camera.getViewMatrix(), proj);
@@ -130,6 +134,16 @@ public class Controller3D implements Controller {
                 }
             }
         });
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                octagon.setModel(octagon.getModel().mul(new Mat4RotZ(0.005)));
+                redraw();
+            }
+        }, 10, 50);
+
     }
 
     private void redraw() {
@@ -140,6 +154,7 @@ public class Controller3D implements Controller {
         renderer.render(arrow);
         renderer.render(cube);
         renderer.render(pyramid);
+        renderer.render(octagon);
 //        triangleRasterizer.rasterize(new Point3D(-1,1,0), new Point3D(1,0,0), new Point3D(0,-1,0), 0x00ff00);
 //        zBuffer.drawWithZTest(10,10,0.5,new Col(0x00ff00));
 //        zBuffer.drawWithZTest(10,10,0.2,new Col(0xff0000));

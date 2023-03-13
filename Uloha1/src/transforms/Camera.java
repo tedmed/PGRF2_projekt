@@ -6,7 +6,7 @@ import java.util.Locale;
  * Virtual camera, controls view transformation via observer position, azimuth
  * and zenith (in radians). Eye position (the origin of camera coordinate set)
  * can be at the observer position (1st person camera mode) or can orbit the
- * observer position at the given radius (3rd person camera mode). Objects of
+ * observer position at the given radius (3rd person camera mode). objects of
  * the class are immutable.
  * 
  * @author PGRF FIM UHK

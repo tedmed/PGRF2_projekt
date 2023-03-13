@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 
 import model.Part;
 import model.Solid;
