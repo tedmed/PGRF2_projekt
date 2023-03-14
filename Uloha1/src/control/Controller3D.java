@@ -23,12 +23,13 @@ public class Controller3D implements Controller {
     private final TriangleRasterizer triangleRasterizer;
     private final LineRasterizer lineRasterizer;
     private Renderer renderer;
-    private Solid arrow, cube, pyramid, octagon;
+    private Solid arrowX, arrowY, arrowZ, cube, pyramid, octagon;
     private Mat4 proj;
     private Camera camera;
     private double cameraSpeed = 0.1;
     private int oldAz, oldZen;
     private int x, y, z;
+    private boolean orth = false;
 
     public Controller3D(Panel panel) {
         this.panel = panel;
@@ -42,7 +43,9 @@ public class Controller3D implements Controller {
 
     public void initObjects(ImageBuffer raster) {
         raster.setClearElement(new Col(0x101010));
-        arrow = new Arrow();
+        arrowX = new Arrow(1,0,0);
+        arrowY = new Arrow(0,1,0);
+        arrowZ = new Arrow(0,0,1);
         cube = new Cube();
         pyramid = new Pyramid();
         octagon = new Octagon();
@@ -98,7 +101,6 @@ public class Controller3D implements Controller {
         camera = new Camera(new Vec3D(x, y, z), Math.toRadians(oldAz), Math.toRadians(oldZen), 1, true);
 
         proj = new Mat4PerspRH(Math.toRadians(60), (float) zBuffer.getWidth() / zBuffer.getHeight(), 0.1, 300);
-//        proj = new Mat4OrthoRH(5, 5, 0.01, 600);
 
         renderer = new Renderer(triangleRasterizer, lineRasterizer, camera.getViewMatrix(), proj);
 
@@ -131,6 +133,16 @@ public class Controller3D implements Controller {
                         camera = camera.right(cameraSpeed);
                         redraw();
                         break;
+                    case KeyEvent.VK_V:
+                        if(orth) {
+                            proj = new Mat4PerspRH(Math.toRadians(60), (float) zBuffer.getWidth() / zBuffer.getHeight(), 0.1, 300);
+                            renderer = new Renderer(triangleRasterizer, lineRasterizer, camera.getViewMatrix(), proj);
+                        }
+                        if(!orth) {
+                            proj = new Mat4OrthoRH(10, 10, 0.1, 300);
+                            renderer = new Renderer(triangleRasterizer, lineRasterizer, camera.getViewMatrix(), proj);
+                        }
+                        orth = !orth;
                 }
             }
         });
@@ -151,7 +163,9 @@ public class Controller3D implements Controller {
         zBuffer.clear();
         renderer.setView(camera.getViewMatrix());
 //        triangleRasterizer.rasterize(new Vertex(1,1,0), new Vertex(-1,0,0), new Vertex(0,-1,0), 0xff00ff);
-        renderer.render(arrow);
+        renderer.render(arrowX);
+        renderer.render(arrowY);
+        renderer.render(arrowZ);
         renderer.render(cube);
         renderer.render(pyramid);
         renderer.render(octagon);
