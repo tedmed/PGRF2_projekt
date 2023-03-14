@@ -10,6 +10,9 @@ import raster.ZBuffer;
 import render.LineRasterizer;
 import render.Renderer;
 import render.TriangleRasterizer;
+import shaders.Shader;
+import shaders.ShaderConstCol;
+import shaders.ShaderInterCol;
 import transforms.*;
 import view.Panel;
 
@@ -28,13 +31,15 @@ public class Controller3D implements Controller {
     private double cameraSpeed = 0.1;
     private int oldAz, oldZen;
     private int x, y, z;
-    private boolean orth = false, rotX = false, rotY = false, rotZ = true;
+    private boolean orth = false, rotX = false, rotY = false, rotZ = true, shaderInter = true;
 
     public Controller3D(Panel panel) {
         this.panel = panel;
         this.zBuffer = new ZBuffer(panel.getRaster());
         this.triangleRasterizer = new TriangleRasterizer(zBuffer);
         this.lineRasterizer = new LineRasterizer(zBuffer);
+        triangleRasterizer.setShader(new ShaderInterCol());
+        lineRasterizer.setShader(new ShaderInterCol());
         initObjects(panel.getRaster());
         initListeners();
         redraw();
@@ -153,6 +158,18 @@ public class Controller3D implements Controller {
                             renderer = new Renderer(triangleRasterizer, lineRasterizer, camera.getViewMatrix(), proj);
                         }
                         orth = !orth;
+                        break;
+                    case KeyEvent.VK_K:
+                        if(shaderInter) {
+                            triangleRasterizer.setShader(new ShaderConstCol());
+                            lineRasterizer.setShader(new ShaderConstCol());
+                        }else{
+                            triangleRasterizer.setShader(new ShaderInterCol());
+                            lineRasterizer.setShader(new ShaderInterCol());
+                        }
+                        shaderInter = !shaderInter;
+                        redraw();
+                        break;
                     case KeyEvent.VK_NUMPAD1:
                         rotX = !rotX;
                         break;

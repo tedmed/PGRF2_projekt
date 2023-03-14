@@ -3,6 +3,7 @@ package render;
 import model.Lerp;
 import model.Vertex;
 import raster.ZBuffer;
+import shaders.Shader;
 import transforms.Col;
 import transforms.Point3D;
 import transforms.Vec3D;
@@ -12,11 +13,17 @@ import java.awt.*;
 public class LineRasterizer {
     private final ZBuffer zBuffer;
     private final Lerp<Vertex> lerp;
+    private Shader shader;
 
     public LineRasterizer(ZBuffer zBuffer) {
         this.zBuffer = zBuffer;
         this.lerp = new Lerp<>();
     }
+
+    public void setShader(Shader shader) {
+        this.shader = shader;
+    }
+
     public void rasterize(Vertex v1, Vertex v2){
 
         //Done: transformace ve Vertexu
@@ -43,7 +50,7 @@ public class LineRasterizer {
                 double t1 = (y - a.getPosition().getY()) / (b.getPosition().getY() - a.getPosition().getY());
                 //Done: použít lerp
                 Vertex vAB = lerp.lerp(a, b, t1);
-                zBuffer.drawWithZTest((int) vAB.getX(), y, vAB.getPosition().getZ(), vAB.getColor());
+                zBuffer.drawWithZTest((int) vAB.getX(), y, vAB.getPosition().getZ(), shader.shade(vAB));
             }
         }
         else {
@@ -58,7 +65,7 @@ public class LineRasterizer {
                 //Done: použít lerp
                 Vertex vAB = lerp.lerp(a, b, t1);
                 //Done: z, Col, uv, normála
-                zBuffer.drawWithZTest(x, (int) vAB.getY(), vAB.getPosition().getZ(), vAB.getColor());
+                zBuffer.drawWithZTest(x, (int) vAB.getY(), vAB.getPosition().getZ(), shader.shade(vAB));
             }
         }
     }
