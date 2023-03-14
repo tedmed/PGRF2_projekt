@@ -13,9 +13,8 @@ import render.TriangleRasterizer;
 import transforms.*;
 import view.Panel;
 
+import javax.swing.*;
 import java.awt.event.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Controller3D implements Controller {
     private final Panel panel;
@@ -29,7 +28,7 @@ public class Controller3D implements Controller {
     private double cameraSpeed = 0.1;
     private int oldAz, oldZen;
     private int x, y, z;
-    private boolean orth = false;
+    private boolean orth = false, rotX = false, rotY = false, rotZ = true;
 
     public Controller3D(Panel panel) {
         this.panel = panel;
@@ -49,6 +48,17 @@ public class Controller3D implements Controller {
         cube = new Cube();
         pyramid = new Pyramid();
         octagon = new Octagon();
+
+        Timer timer = new Timer(10, e -> {
+            if(rotX)
+                octagon.setModel(octagon.getModel().mul(new Mat4RotX(0.005)));
+            if(rotY)
+                octagon.setModel(octagon.getModel().mul(new Mat4RotY(0.005)));
+            if(rotZ)
+                octagon.setModel(octagon.getModel().mul(new Mat4RotZ(0.005)));
+            redraw();
+        });
+        timer.start();
     }
 
     @Override
@@ -143,18 +153,18 @@ public class Controller3D implements Controller {
                             renderer = new Renderer(triangleRasterizer, lineRasterizer, camera.getViewMatrix(), proj);
                         }
                         orth = !orth;
+                    case KeyEvent.VK_NUMPAD1:
+                        rotX = !rotX;
+                        break;
+                    case KeyEvent.VK_NUMPAD2:
+                        rotY = !rotY;
+                        break;
+                    case KeyEvent.VK_NUMPAD3:
+                        rotZ = !rotZ;
+                        break;
                 }
             }
         });
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                octagon.setModel(octagon.getModel().mul(new Mat4RotZ(0.005)));
-                redraw();
-            }
-        }, 10, 50);
 
     }
 

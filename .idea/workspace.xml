@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ef45a15-27a5-42b1-8243-5678d6400911" name="Changes" comment="toči toči oktagon">
+    <list default="true" id="0ef45a15-27a5-42b1-8243-5678d6400911" name="Changes" comment="Jou hou, šipky.. krásný to mám">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uloha1/src/control/Controller3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/Uloha1/src/control/Controller3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uloha1/src/objects/Arrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/Uloha1/src/objects/Arrow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Uloha1/src/objects/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/Uloha1/src/objects/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uloha1/src/view/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Uloha1/src/view/Panel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Uloha1/src/objects/Pyramid.java" beforeDir="false" afterPath="$PROJECT_DIR$/Uloha1/src/objects/Pyramid.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678731107558</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Jou hou, šipky.. krásný to mám">
+      <created>1678788585006</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678788585006</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,6 +115,7 @@
     <MESSAGE value="added rotation" />
     <MESSAGE value="copy from cv_1.." />
     <MESSAGE value="toči toči oktagon" />
-    <option name="LAST_COMMIT_MESSAGE" value="toči toči oktagon" />
+    <MESSAGE value="Jou hou, šipky.. krásný to mám" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jou hou, šipky.. krásný to mám" />
   </component>
 </project>

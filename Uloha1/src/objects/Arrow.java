@@ -18,26 +18,26 @@ public class Arrow extends Solid {
         if(x == 1) {
             vertexBuffer.add(new Vertex(1, 0, 0, colX));
             vertexBuffer.add(new Vertex(1, 0, 0, white));
-            vertexBuffer.add(new Vertex(0.75, 0.2, 0.2, colX));
-            vertexBuffer.add(new Vertex(0.75, 0.2, -0.2, colX));
-            vertexBuffer.add(new Vertex(0.75, -0.2, -0.2, colX));
-            vertexBuffer.add(new Vertex(0.75, -0.2, 0.2, colX));
+            vertexBuffer.add(new Vertex(0.75, 0.1, 0.1, colX));
+            vertexBuffer.add(new Vertex(0.75, 0.1, -0.1, colX));
+            vertexBuffer.add(new Vertex(0.75, -0.1, -0.1, colX));
+            vertexBuffer.add(new Vertex(0.75, -0.1, 0.1, colX));
         }
         if(y == 1) {
             vertexBuffer.add(new Vertex(0, 1, 0, colY));
             vertexBuffer.add(new Vertex(0, 1, 0, white));
-            vertexBuffer.add(new Vertex(0.2, 0.75, 0.2, colY));
-            vertexBuffer.add(new Vertex(0.2, 0.75, -0.2, colY));
-            vertexBuffer.add(new Vertex(-0.2, 0.75, -0.2, colY));
-            vertexBuffer.add(new Vertex(-0.2, 0.75, 0.2, colY));
+            vertexBuffer.add(new Vertex(0.1, 0.75, 0.1, colY));
+            vertexBuffer.add(new Vertex(0.1, 0.75, -0.1, colY));
+            vertexBuffer.add(new Vertex(-0.1, 0.75, -0.1, colY));
+            vertexBuffer.add(new Vertex(-0.1, 0.75, 0.1, colY));
         }
         if(z == 1) {
             vertexBuffer.add(new Vertex(0, 0, 1, colZ));
             vertexBuffer.add(new Vertex(0, 0, 1, white));
-            vertexBuffer.add(new Vertex(0.2, 0.2, 0.75, colZ));
-            vertexBuffer.add(new Vertex(-0.2, 0.2, 0.75, colZ));
-            vertexBuffer.add(new Vertex(-0.2, -0.2, 0.75, colZ));
-            vertexBuffer.add(new Vertex(0.2, -0.2, 0.75, colZ));
+            vertexBuffer.add(new Vertex(0.1, 0.1, 0.75, colZ));
+            vertexBuffer.add(new Vertex(-0.1, 0.1, 0.75, colZ));
+            vertexBuffer.add(new Vertex(-0.1, -0.1, 0.75, colZ));
+            vertexBuffer.add(new Vertex(0.1, -0.1, 0.75, colZ));
         }
 
 
